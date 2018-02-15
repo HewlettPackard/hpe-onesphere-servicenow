@@ -41,7 +41,7 @@ If URI is null, the user could not be found in OneSphere</description>
 		var message = ex.getMessage();
 	}
 	
-	gs.info("Exiting getOneSphereUriForUser");
+	gs.info("Exiting getOneSphereUriForUser with user URI " + userUri);
 	return userUri;
 }
 ]]></script>
@@ -49,13 +49,13 @@ If URI is null, the user could not be found in OneSphere</description>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-02-14 14:07:54</sys_created_on>
         <sys_id>a4dfe1d5db501300c908f6dfbf9619a2</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name>getOneSphereUriForUser</sys_name>
         <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
         <sys_update_name>sys_script_include_a4dfe1d5db501300c908f6dfbf9619a2</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-02-15 00:49:13</sys_updated_on>
+        <sys_updated_on>2018-02-15 11:13:35</sys_updated_on>
     </sys_script_include>
 </record_update>

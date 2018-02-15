@@ -10,7 +10,7 @@
         <script><![CDATA[function addUser(token, email, name, role){
 	
 	gs.info("Add user " + name + " " + email + " to OneSphere with role " + role);
-	var httpStatus, r, requestBody, response, responseBody;
+	var httpStatus, r, requestBody, response, responseBody,userUri;
 	
 	try {
 		r = new sn_ws.RESTMessageV2('x_185323_onesphere.OneSphere users', 'Add user');
@@ -28,15 +28,14 @@
 			"role": theRole,
 			"password": "changeme"			
 		};
-		
-		gs.info("Request body " + String(requestBody));
-				
+								
 		r.setRequestBody(JSON.stringify(requestBody));			
 		r.setEccParameter('skip_sensor', true);
 		response = r.execute();
-		responseBody = response.getBody();
-		gs.info("Response body " + responseBody);
-		httpStatus = response.getStatusCode();
+		responseBody = response.getBody();		
+		var jsonObject = JSON.parse(responseBody);
+		userUri = jsonObject.uri;
+		httpStatus = response.getStatusCode();		
 	}
 	catch(ex) {
 		var message = ex.getMessage();
@@ -64,24 +63,25 @@
 		response = r.execute();
 		responseBody = response.getBody();
 		httpStatus = response.getStatusCode();
-		gs.info("Create user and reset password for " + email);
+		gs.info("Created user and reset password for " + email);
 	}
 	catch(ex) {
 		var message = ex.getMessage();
 	}	
 	
+	return userUri;
 }]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-02-14 17:44:12</sys_created_on>
         <sys_id>d24c529ddb901300c908f6dfbf961956</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>19</sys_mod_count>
         <sys_name>addUser</sys_name>
         <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
         <sys_update_name>sys_script_include_d24c529ddb901300c908f6dfbf961956</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-02-15 00:48:39</sys_updated_on>
+        <sys_updated_on>2018-02-15 12:12:42</sys_updated_on>
     </sys_script_include>
 </record_update>
