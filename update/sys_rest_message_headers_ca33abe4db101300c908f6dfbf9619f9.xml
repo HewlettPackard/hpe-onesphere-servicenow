@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_rest_message_headers">
+    <sys_rest_message_headers action="INSERT_OR_UPDATE">
+        <name>Content-Type</name>
+        <rest_message display_value="Get Auth token from OneSphere">ac926fa4db101300c908f6dfbf9619f8</rest_message>
+        <sys_class_name>sys_rest_message_headers</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-02-12 14:31:22</sys_created_on>
+        <sys_id>ca33abe4db101300c908f6dfbf9619f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Content-Type</sys_name>
+        <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
+        <sys_update_name>sys_rest_message_headers_ca33abe4db101300c908f6dfbf9619f9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-02-12 14:31:22</sys_updated_on>
+        <value>application/json</value>
+    </sys_rest_message_headers>
+</record_update>

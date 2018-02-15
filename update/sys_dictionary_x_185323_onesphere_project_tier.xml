@@ -12,13 +12,13 @@
 	return '';  // return the calculated value
 
 })(current);]]></calculation>
-        <choice>1</choice>
+        <choice>3</choice>
         <choice_field/>
         <choice_table/>
-        <column_label>tier</column_label>
+        <column_label>Tier</column_label>
         <comments/>
         <create_roles/>
-        <default_value/>
+        <default_value>Silver</default_value>
         <defaultsort/>
         <delete_roles/>
         <dependent/>
@@ -34,7 +34,7 @@
         <function_definition/>
         <function_field>false</function_field>
         <internal_type display_value="String">string</internal_type>
-        <mandatory>false</mandatory>
+        <mandatory>true</mandatory>
         <max_length>100</max_length>
         <name>x_185323_onesphere_project</name>
         <next_element/>
@@ -55,14 +55,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-29 12:23:14</sys_created_on>
         <sys_id>878ff200db401300c908f6dfbf961965</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_name>tier</sys_name>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Tier</sys_name>
         <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
         <sys_policy/>
         <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
         <sys_update_name>sys_dictionary_x_185323_onesphere_project_tier</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+        <sys_updated_on>2018-02-12 18:39:31</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

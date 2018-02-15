@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_185323_onesphere_project</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Create project in OneSphere</name>
+        <order>100</order>
+        <priority>0</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	
+	var r, response, responseBody, httpstatus, token, projectURI, projectOwnerRoleUri, projectMemberRoleUri, jsonObject;
+	var userName = [];
+	var userEmail = [];
+	var userRole = [];
+	
+	
+	// First fetch Auth token to communicate with OneSphere
+	gs.info("Initiating the REST API to fetch auth token from OneSphere");
+	try {
+		r = new sn_ws.RESTMessageV2('x_185323_onesphere.Get Auth token from OneSphere', 'Get Auth token');
+		r.setEccParameter('skip_sensor', true);
+		response = r.execute();
+		responseBody = response.getBody();
+		httpStatus = response.getStatusCode();
+		gs.info("REST Response " + responseBody);
+		
+		jsonObject = JSON.parse(responseBody);
+		token = jsonObject.token;
+		gs.info('The token for this session with OneSphere is ' + token );
+		
+	}
+	catch(ex) {
+		var message = ex.getMessage();
+		gs.info("Error while fetching Auth token from OneSphere : " + message);
+	}
+	
+	gs.info("Now creating the project" + current.project_name);
+	try {
+		var createProjRequest = new sn_ws.RESTMessageV2('x_185323_onesphere.Create project in OneSphere', 'Create project');
+		
+		var Environment = current.environment.toLowerCase();
+		var LineOfBusiness = current.line_of_business.toLowerCase();
+		var Tier = current.tier.toLowerCase();
+		
+		var requestBody = {
+			name: ""+ current.project_name,
+			description: ""+ current.description,
+			tagUris: [
+			"/rest/tags/environment="+ Environment,
+			"/rest/tags/line-of-business="+ LineOfBusiness,
+			"/rest/tags/tier="+ Tier
+			]
+		};
+		
+		createProjRequest.setRequestBody(JSON.stringify(requestBody));
+		createProjRequest.setRequestHeader("Authorization","Bearer "+token);
+		createProjRequest.setEccParameter('skip_sensor', true);
+		var response2 = createProjRequest.execute();
+		var jsonBody = response2.getBody();
+		var httpStatus2 = response2.getStatusCode();
+		jsonObject = JSON.parse(jsonBody);
+		projectURI = jsonObject.uri;
+		
+		gs.info("Created project successfully with URI  " + projectURI);
+	}
+	catch(ex) {
+		var message = ex.getMessage();
+	}
+ 	
+	
+	//Fetch project owner details
+	gs.info("Lets fetch project owner user details requested in ticket.");
+	var gr = new GlideRecord('sys_user');
+	gr.get(current.u_reference_1);
+	var projectOwnerEmail = gr.email;
+	var projectOwnerName= gr.name;
+	gs.info("Email for the user required to be set as project owner is " + projectOwnerEmail );
+		
+	// Get the project owner URI
+	var projectOwnerUri = getOneSphereUriForUser(projectOwnerEmail);
+	if(projectOwnerUri.length == 0)
+	{
+		gs.info("Could not find user " + projectOwnerEmail + " in OneSphere. Hence adding her/him.");
+		addUser(token, projectOwnerEmail, projectOwnerName, "project-creator");		
+		sleep(10);
+	}
+	
+	// Add project owner to project as member=project-owner
+	gs.info("OneSphere URI for user " + projectOwnerEmail + " is " + projectOwnerUri);
+	
+	
+	//Lets fetch the URI for role project-owner and project-member
+	try {
+		r = new sn_ws.RESTMessageV2('x_185323_onesphere.OneSphere Membership Roles', 'GET');
+		r.setRequestHeader("Authorization","Bearer "+token);
+		//r.setRequestHeader("Authorization","Bearer gAAAAABahDg79JBJfSTJouGGxukJqT7C_BGBTuoEU2zt9dINd_3z13KqHnzlq5UJqWJa1vJl-5ulg_UTaO6xbavdd7pOFWTaiJ_MUFlzMkjW0X83iHmu_gTJHD2_5wMTAQilmcW5RAZz-QEveI3yahJoI6KS0NBiZw");
+		
+		r.setEccParameter('skip_sensor', true);
+		response = r.execute();
+		responseBody = response.getBody();
+		httpStatus = response.getStatusCode();
+		
+		jsonObject = JSON.parse(responseBody);
+		var members = jsonObject.members;
+		for(var i in members){
+			var uri = members[i].name;
+			if(uri == "project-owner")
+				{
+				projectOwnerRoleUri = members[i].uri;
+			}
+			else if(uri == "project-member")
+				{
+				projectMemberRoleUri = members[i].uri;
+			}
+		}
+	}
+	catch(ex) {
+		var message = ex.getMessage();
+	}
+	
+	// Add membership for project owner
+	
+	gs.info("Project-owner role URI in OneSphere is " + projectOwnerRoleUri);
+	sleep(10);
+	var ret = addUserMembershipForProject(token,projectOwnerUri,projectOwnerRoleUri,projectURI);
+	if(ret > 299)
+		{ 
+			gs.error("Failed to add project owner " + projectOwnerEmail + " to project " + projectURI);
+		}
+		
+	gs.info("Project-member role URI in OneSphere" + projectMemberRoleUri);
+	gs.info("Project member list is " + current.project_member)	;
+	
+	var array = current.project_member.split(',');
+	var record = new GlideRecord('sys_user');
+	
+	for (var j=0; j < array.length; j++) {
+		record.get(array[j]);
+		gs.info(j + ". " + record.email);
+		gs.info("Calling function getOneSphereUriForUser " + record.email);
+		
+		var memberUserUri = getOneSphereUriForUser(token, record.email);
+		gs.info("Uri returned from function for  " + record.email + " is " + memberUserUri + " with length " + memberUserUri.length);
+		if(memberUserUri.length > 0)
+		{			
+			gs.info("Add user " + memberUserUri + " to project " + projectURI);
+			sleep(10);
+			var ret1 = addUserMembershipForProject(token, memberUserUri, projectMemberRoleUri, projectURI);
+			if( ret1 > 299)
+			{
+				gs.info("Failed to add project member " +  record.email + " to project " + projectURI + ". Skipping user.");	
+			}			
+		}
+		else if(memberUserUri.length == 0)
+		{
+			gs.info("Failed to find user " + record.email + " in OneSphere. Hence adding this user.");			
+			sleep(10);
+			addUser(token, record.email, record.name, "consumer");			
+		}		
+	}
+			
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-02-09 13:50:50</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>cd3d3723db801300c908f6dfbf96190a</sys_id>
+        <sys_mod_count>97</sys_mod_count>
+        <sys_name>Create project in OneSphere</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
+        <sys_update_name>sys_script_cd3d3723db801300c908f6dfbf96190a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-02-15 01:07:37</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=cd3d3723db801300c908f6dfbf96190a"/>
+</record_update>

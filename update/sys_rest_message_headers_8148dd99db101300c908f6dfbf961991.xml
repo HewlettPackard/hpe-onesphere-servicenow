@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_rest_message_headers">
+    <sys_rest_message_headers action="INSERT_OR_UPDATE">
+        <name>Content-Type</name>
+        <rest_message display_value="OneSphere Memberships">5c481d41dbd01300c908f6dfbf96197b</rest_message>
+        <sys_class_name>sys_rest_message_headers</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-02-14 12:19:28</sys_created_on>
+        <sys_id>8148dd99db101300c908f6dfbf961991</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Content-Type</sys_name>
+        <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
+        <sys_update_name>sys_rest_message_headers_8148dd99db101300c908f6dfbf961991</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-02-14 12:19:28</sys_updated_on>
+        <value>application/json</value>
+    </sys_rest_message_headers>
+</record_update>

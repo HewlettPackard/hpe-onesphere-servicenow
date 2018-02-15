@@ -5,8 +5,27 @@
             <dependent_value/>
             <element>tier</element>
             <hint/>
-            <inactive>false</inactive>
+            <inactive>true</inactive>
             <label>Choice 1</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>0</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:21:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>810818f0db901300c908f6dfbf961950</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
+            <value>Choice 1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>tier</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Silver</label>
             <language>en</language>
             <name>x_185323_onesphere_project</name>
             <sequence>0</sequence>
@@ -15,17 +34,36 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>d0268704db401300c908f6dfbf9619c2</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
             <value>Silver</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
             <element>tier</element>
             <hint/>
-            <inactive>false</inactive>
+            <inactive>true</inactive>
             <label>Choice 2</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:21:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>010818f0db901300c908f6dfbf961951</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
+            <value>Choice 2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>tier</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Gold</label>
             <language>en</language>
             <name>x_185323_onesphere_project</name>
             <sequence>1</sequence>
@@ -34,17 +72,36 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>14268704db401300c908f6dfbf9619c3</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
             <value>Gold</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
             <element>tier</element>
             <hint/>
-            <inactive>false</inactive>
+            <inactive>true</inactive>
             <label>Choice 3</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:21:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8d0818f0db901300c908f6dfbf961951</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
+            <value>Choice 3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>tier</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Platinum</label>
             <language>en</language>
             <name>x_185323_onesphere_project</name>
             <sequence>2</sequence>
@@ -53,9 +110,9 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>90268704db401300c908f6dfbf9619c4</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
             <value>Platinum</value>
         </sys_choice>
         <sys_choice_set action="INSERT_OR_UPDATE">

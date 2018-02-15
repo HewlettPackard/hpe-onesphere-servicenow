@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_185323_onesphere.addUser</api_name>
+        <client_callable>false</client_callable>
+        <description>Add a user to OneSphere with this email address. User is always added as  consumer or project-creator and the password is reset.</description>
+        <name>addUser</name>
+        <script><![CDATA[function addUser(token, email, name, role){
+	
+	gs.info("Add user " + name + " " + email + " to OneSphere with role " + role);
+	var httpStatus, r, requestBody, response, responseBody;
+	
+	try {
+		r = new sn_ws.RESTMessageV2('x_185323_onesphere.OneSphere users', 'Add user');
+		r.setRequestHeader("Authorization","Bearer "+token);
+		//r.setRequestHeader("Authorization","Bearer gAAAAABahDg79JBJfSTJouGGxukJqT7C_BGBTuoEU2zt9dINd_3z13KqHnzlq5UJqWJa1vJl-5ulg_UTaO6xbavdd7pOFWTaiJ_MUFlzMkjW0X83iHmu_gTJHD2_5wMTAQilmcW5RAZz-QEveI3yahJoI6KS0NBiZw");
+				
+		var theEmail = String(email);
+		var theName = String(name);
+		var thePasswd = "changeme";
+		var theRole = String(role);
+		
+		 requestBody = {
+			"email": theEmail,
+			"name": theName,
+			"role": theRole,
+			"password": "changeme"			
+		};
+		
+		gs.info("Request body " + String(requestBody));
+				
+		r.setRequestBody(JSON.stringify(requestBody));			
+		r.setEccParameter('skip_sensor', true);
+		response = r.execute();
+		responseBody = response.getBody();
+		gs.info("Response body " + responseBody);
+		httpStatus = response.getStatusCode();
+	}
+	catch(ex) {
+		var message = ex.getMessage();
+		return;
+	}
+	
+	if (httpStatus > 299)
+		{
+			gs.info("Failed to add user " + name + " to OneSphere. HttpStatus is " + httpStatus);
+			return;
+		}
+	
+	//change password
+	try{
+		r = new sn_ws.RESTMessageV2('x_185323_onesphere.Reset password', 'Reset');	
+		//r.setRequestHeader("Authorization","Bearer "+token);
+		r.setRequestHeader("Authorization","Bearer gAAAAABahDg79JBJfSTJouGGxukJqT7C_BGBTuoEU2zt9dINd_3z13KqHnzlq5UJqWJa1vJl-5ulg_UTaO6xbavdd7pOFWTaiJ_MUFlzMkjW0X83iHmu_gTJHD2_5wMTAQilmcW5RAZz-QEveI3yahJoI6KS0NBiZw");
+			
+		requestBody = {
+			email: email			
+		};
+		
+		r.setRequestBody(JSON.stringify(requestBody));		
+		r.setEccParameter('skip_sensor', true);
+		response = r.execute();
+		responseBody = response.getBody();
+		httpStatus = response.getStatusCode();
+		gs.info("Create user and reset password for " + email);
+	}
+	catch(ex) {
+		var message = ex.getMessage();
+	}	
+	
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-02-14 17:44:12</sys_created_on>
+        <sys_id>d24c529ddb901300c908f6dfbf961956</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>addUser</sys_name>
+        <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
+        <sys_update_name>sys_script_include_d24c529ddb901300c908f6dfbf961956</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-02-15 00:48:39</sys_updated_on>
+    </sys_script_include>
+</record_update>

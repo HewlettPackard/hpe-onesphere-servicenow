@@ -5,8 +5,27 @@
             <dependent_value/>
             <element>environment</element>
             <hint/>
-            <inactive>false</inactive>
+            <inactive>true</inactive>
             <label>Choice 1</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>0</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:21:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4508d4f0db901300c908f6dfbf961989</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:37:44</sys_updated_on>
+            <value>Choice 1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>environment</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Staging</label>
             <language>en</language>
             <name>x_185323_onesphere_project</name>
             <sequence>0</sequence>
@@ -15,17 +34,36 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>dc268704db401300c908f6dfbf9619a1</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+            <sys_updated_on>2018-02-12 18:37:43</sys_updated_on>
             <value>Staging</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
             <element>environment</element>
             <hint/>
-            <inactive>false</inactive>
+            <inactive>true</inactive>
             <label>Choice 2</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:21:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c108d4f0db901300c908f6dfbf96198a</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:37:44</sys_updated_on>
+            <value>Choice 2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>environment</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Development</label>
             <language>en</language>
             <name>x_185323_onesphere_project</name>
             <sequence>1</sequence>
@@ -34,17 +72,36 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>50268704db401300c908f6dfbf9619a3</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+            <sys_updated_on>2018-02-12 18:37:44</sys_updated_on>
             <value>Development</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
             <element>environment</element>
             <hint/>
-            <inactive>false</inactive>
+            <inactive>true</inactive>
             <label>Choice 3</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:21:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4108d4f0db901300c908f6dfbf96198b</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:37:44</sys_updated_on>
+            <value>Choice 3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>environment</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Production</label>
             <language>en</language>
             <name>x_185323_onesphere_project</name>
             <sequence>2</sequence>
@@ -53,9 +110,9 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>dc268704db401300c908f6dfbf9619a3</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+            <sys_updated_on>2018-02-12 18:37:44</sys_updated_on>
             <value>Production</value>
         </sys_choice>
         <sys_choice_set action="INSERT_OR_UPDATE">

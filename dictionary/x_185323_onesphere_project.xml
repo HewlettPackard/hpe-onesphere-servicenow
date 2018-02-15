@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
-    <element label="Project" max_length="40" name="x_185323_onesphere_project" type="collection">
+    <element label="OneSphere Project" max_length="40" name="x_185323_onesphere_project" type="collection">
         <element label="Active" max_length="40" name="active" type="boolean"/>
-        <element label="Approval" max_length="40" name="approval" type="string"/>
         <element label="Closed" max_length="40" name="closed" type="glide_date_time"/>
         <element label="Closed By" max_length="32" name="closed_by" reference="sys_user" type="reference"/>
         <element label="Close notes" max_length="40" name="close_notes" type="string"/>
-        <element label="Due" max_length="40" name="due" type="due_date"/>
-        <element choice="1" display="true" label="Environment" mandatory="true" max_length="200" name="environment" type="string">
+        <element label="Description" max_length="40" name="description" type="string" use_dependent_field="true"/>
+        <element choice="1" default="Staging" label="Environment" mandatory="true" max_length="200" name="environment" type="string">
             <choice>
-                <element label="Choice 1" sequence="0" value="Staging"/>
-                <element label="Choice 2" sequence="1" value="Development"/>
-                <element label="Choice 3" sequence="2" value="Production"/>
+                <element label="Staging" sequence="0" value="Staging"/>
+                <element label="Development" sequence="1" value="Development"/>
+                <element label="Production" sequence="2" value="Production"/>
             </choice>
         </element>
-        <element choice="1" label="Line of business" mandatory="true" max_length="100" name="line_of_business" type="string">
+        <element choice="3" default="Incubation" label="Line of Business" mandatory="true" max_length="100" name="line_of_business" type="string">
             <choice>
-                <element label="Choice 1" sequence="0" value="Incubation"/>
-                <element label="Choice 2" sequence="1" value="New ventures"/>
+                <element label="Incubation" sequence="0" value="Incubation"/>
+                <element label="New Ventures" sequence="1" value="new-ventures"/>
             </choice>
         </element>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
         <element label="Project member" mandatory="true" max_length="4000" name="project_member" reference="sys_user" type="glide_list"/>
         <element label="Project name" mandatory="true" max_length="100" name="project_name" type="string"/>
         <element label="Project owner" mandatory="true" max_length="100" name="project_owner" type="string"/>
-        <element choice="1" label="tier" max_length="100" name="tier" type="string">
+        <element choice="1" default="requested" display="true" label="State" max_length="40" name="state" type="string">
             <choice>
-                <element label="Choice 1" sequence="0" value="Silver"/>
-                <element label="Choice 2" sequence="1" value="Gold"/>
-                <element label="Choice 3" sequence="2" value="Platinum"/>
+                <element label="Approved" value="approved"/>
+                <element label="Closed complete" value="Closed complete"/>
+                <element label="Requested" value="requested"/>
             </choice>
         </element>
+        <element choice="3" default="Silver" label="Tier" mandatory="true" max_length="100" name="tier" type="string">
+            <choice>
+                <element label="Silver" sequence="0" value="Silver"/>
+                <element label="Gold" sequence="1" value="Gold"/>
+                <element label="Platinum" sequence="2" value="Platinum"/>
+            </choice>
+        </element>
+        <element label="Project owner" mandatory="true" max_length="32" name="u_reference_1" reference="sys_user" type="reference"/>
         <index name="index">
+            <element name="u_reference_1"/>
+        </index>
+        <index name="index2">
             <element name="closed_by"/>
         </index>
     </element>

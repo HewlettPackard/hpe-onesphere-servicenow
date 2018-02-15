@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_185323_onesphere.addUserMembershipForProject</api_name>
+        <client_callable>false</client_callable>
+        <description>Script will add this user as member of given project. The provided role will be assigned to user in this project.&#13;
+Will return true if successful.</description>
+        <name>addUserMembershipForProject</name>
+        <script><![CDATA[function addUserMembershipForProject(token, user, role, project) {
+
+	gs.info("Entering script addUserMembershipForProject to add user " + user + "for role " + role + "to project" + project);
+	var httpStatus=0;
+	
+	try { 
+		var r = new sn_ws.RESTMessageV2('x_185323_onesphere.OneSphere Memberships', 'Create membership');
+		r.setRequestHeader("Authorization","Bearer "+token);
+		//r.setRequestHeader("Authorization","Bearer gAAAAABahDg79JBJfSTJouGGxukJqT7C_BGBTuoEU2zt9dINd_3z13KqHnzlq5UJqWJa1vJl-5ulg_UTaO6xbavdd7pOFWTaiJ_MUFlzMkjW0X83iHmu_gTJHD2_5wMTAQilmcW5RAZz-QEveI3yahJoI6KS0NBiZw");
+			
+		var requestBody = {
+			membershipRoleUri: role,
+			userUri: user,
+			projectUri:project
+		};
+		
+		r.setRequestBody(JSON.stringify(requestBody));
+		r.setEccParameter('skip_sensor', true);
+		var response = r.execute();
+		var responseBody = response.getBody();
+		httpStatus = response.getStatusCode();				
+	}
+	catch(ex) {
+		message = ex.getMessage();		
+	}
+	return httpStatus;
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-02-14 12:56:33</sys_created_on>
+        <sys_id>54ff9d9ddb101300c908f6dfbf96197d</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>addUserMembershipForProject</sys_name>
+        <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
+        <sys_update_name>sys_script_include_54ff9d9ddb101300c908f6dfbf96197d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-02-15 00:42:15</sys_updated_on>
+    </sys_script_include>
+</record_update>

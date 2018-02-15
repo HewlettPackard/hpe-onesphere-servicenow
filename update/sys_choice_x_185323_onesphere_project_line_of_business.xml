@@ -5,8 +5,27 @@
             <dependent_value/>
             <element>line_of_business</element>
             <hint/>
-            <inactive>false</inactive>
+            <inactive>true</inactive>
             <label>Choice 1</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>0</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:35:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>333b9474db901300c908f6dfbf9619f0</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
+            <value>Choice 1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>line_of_business</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Incubation</label>
             <language>en</language>
             <name>x_185323_onesphere_project</name>
             <sequence>0</sequence>
@@ -15,29 +34,86 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>1c268704db401300c908f6dfbf9619ac</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>5</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
             <value>Incubation</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
             <element>line_of_business</element>
             <hint/>
-            <inactive>false</inactive>
-            <label>Choice 2</label>
+            <inactive>true</inactive>
+            <label>New ventures</label>
             <language>en</language>
             <name>x_185323_onesphere_project</name>
-            <sequence>1</sequence>
+            <sequence>0</sequence>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2018-01-29 12:50:38</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>14268704db401300c908f6dfbf9619ba</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>2</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-01-29 12:50:38</sys_updated_on>
+            <sys_updated_on>2018-02-12 18:10:33</sys_updated_on>
             <value>New ventures</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>line_of_business</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>Choice 2</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:35:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bf3b9474db901300c908f6dfbf9619f0</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
+            <value>Choice 2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>line_of_business</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>New Ventures</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:10:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5f9590b0db901300c908f6dfbf96194e</sys_id>
+            <sys_mod_count>8</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:39:31</sys_updated_on>
+            <value>new-ventures</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>line_of_business</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>Choice 3</label>
+            <language>en</language>
+            <name>x_185323_onesphere_project</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-02-12 18:35:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bb3bd474db901300c908f6dfbf96190a</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-02-12 18:38:37</sys_updated_on>
+            <value>Choice 3</value>
         </sys_choice>
         <sys_choice_set action="INSERT_OR_UPDATE">
             <element>line_of_business</element>

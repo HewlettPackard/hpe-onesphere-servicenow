@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_185323_onesphere.getOneSphereUriForUser</api_name>
+        <client_callable>false</client_callable>
+        <description>Get the OneSphere URI of user &#13;
+Input : Email&#13;
+Return: URI&#13;
+If URI is null, the user could not be found in OneSphere</description>
+        <name>getOneSphereUriForUser</name>
+        <script><![CDATA[function getOneSphereUriForUser(token, inputemail) {
+	gs.info("Entering script getOneSphereUriForUser to find URI for user " + inputemail);
+	
+	var userUri = "";
+	
+	try {
+		var r = new sn_ws.RESTMessageV2('x_185323_onesphere.OneSphere users', 'GET USERS');
+		r.setRequestHeader("Authorization","Bearer "+token);
+		//r.setRequestHeader("Authorization","Bearer gAAAAABahDg79JBJfSTJouGGxukJqT7C_BGBTuoEU2zt9dINd_3z13KqHnzlq5UJqWJa1vJl-5ulg_UTaO6xbavdd7pOFWTaiJ_MUFlzMkjW0X83iHmu_gTJHD2_5wMTAQilmcW5RAZz-QEveI3yahJoI6KS0NBiZw");
+		
+		r.setEccParameter('skip_sensor', true);
+		var response = r.execute();
+		var responseBody = response.getBody();
+		var httpStatus = response.getStatusCode();
+		
+		var jsonObject = JSON.parse(responseBody);
+		var members = jsonObject.members;
+		for(var i in members){
+			var email = members[i].email;
+			if(email == inputemail)
+				{
+					userUri = members[i].uri;
+					gs.info("OneSphere URI for user " + inputemail + " is " + userUri);
+					break;
+			}			
+		}
+	}
+	catch(ex) {
+		var message = ex.getMessage();
+	}
+	
+	gs.info("Exiting getOneSphereUriForUser");
+	return userUri;
+}
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-02-14 14:07:54</sys_created_on>
+        <sys_id>a4dfe1d5db501300c908f6dfbf9619a2</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>getOneSphereUriForUser</sys_name>
+        <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
+        <sys_update_name>sys_script_include_a4dfe1d5db501300c908f6dfbf9619a2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-02-15 00:49:13</sys_updated_on>
+    </sys_script_include>
+</record_update>
