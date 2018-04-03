@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-01-29 12:23:15</sys_created_on>
+        <sys_id>07df3e00db401300c908f6dfbf9619a0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_185323_onesphere_project.x_185323_onesphere.project_user</sys_name>
+        <sys_package display_value="OneSphere integration" source="x_185323_onesphere">6a99490edb230300c908f6dfbf96195f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OneSphere integration">6a99490edb230300c908f6dfbf96195f</sys_scope>
+        <sys_security_acl display_value="x_185323_onesphere_project">4fdf3e00db401300c908f6dfbf961984</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_07df3e00db401300c908f6dfbf9619a0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-01-29 12:23:15</sys_updated_on>
+        <sys_user_role display_value="x_185323_onesphere.project_user" name="x_185323_onesphere.project_user">2adf3a8cdb001300c908f6dfbf9619ee</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>
