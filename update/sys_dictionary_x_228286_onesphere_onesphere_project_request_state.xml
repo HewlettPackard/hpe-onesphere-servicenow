@@ -12,13 +12,13 @@
 	return '';  // return the calculated value
 
 })(current);]]></calculation>
-        <choice>1</choice>
+        <choice>3</choice>
         <choice_field/>
         <choice_table/>
         <column_label>Request state</column_label>
         <comments/>
         <create_roles/>
-        <default_value/>
+        <default_value>Requested</default_value>
         <defaultsort/>
         <delete_roles/>
         <dependent/>
@@ -55,14 +55,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-05-30 18:06:31</sys_created_on>
         <sys_id>5ca65f8b4f561300fb4cb82ca310c7b4</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Request state</sys_name>
         <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
         <sys_policy/>
         <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
         <sys_update_name>sys_dictionary_x_228286_onesphere_onesphere_project_request_state</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-30 18:30:10</sys_updated_on>
+        <sys_updated_on>2018-05-30 20:30:47</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

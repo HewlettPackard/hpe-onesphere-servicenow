@@ -32,12 +32,12 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-05-30 19:01:13</sys_created_on>
         <sys_id>6453a3074f961300fb4cb82ca310c73b</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-30 19:01:47</sys_updated_on>
+        <sys_updated_on>2018-05-30 19:56:20</sys_updated_on>
         <table>x_228286_onesphere_onesphere_project</table>
         <timezone/>
-        <validated>false</validated>
+        <validated>true</validated>
         <workflow display_value="OneSphere_project">4ec0e7834f961300fb4cb82ca310c74e</workflow>
     </wf_workflow_version>
     <wf_workflow action="INSERT_OR_UPDATE">

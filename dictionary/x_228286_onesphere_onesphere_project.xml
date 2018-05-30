@@ -19,7 +19,7 @@
         <element label="Project member" max_length="4000" name="project_member" reference="sys_user" type="glide_list"/>
         <element label="Project name" max_length="40" name="project_name" type="string"/>
         <element label="Project owner" max_length="32" name="project_owner" reference="sys_user" type="reference"/>
-        <element choice="1" label="Request state" max_length="40" name="request_state" type="string">
+        <element choice="3" default="Requested" label="Request state" max_length="40" name="request_state" type="string">
             <choice>
                 <element label="Approved" value="Approved"/>
                 <element label="Failed" value="Failed"/>

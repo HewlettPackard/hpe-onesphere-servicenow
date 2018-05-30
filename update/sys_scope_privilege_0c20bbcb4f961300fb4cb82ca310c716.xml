@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>execute</operation>
+        <source_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>Manjunath</sys_created_by>
+        <sys_created_on>2018-05-30 19:57:09</sys_created_on>
+        <sys_id>0c20bbcb4f961300fb4cb82ca310c716</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ScriptableRESTMessageClient.setEndpoint</sys_name>
+        <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
+        <sys_update_name>sys_scope_privilege_0c20bbcb4f961300fb4cb82ca310c716</sys_update_name>
+        <sys_updated_by>Manjunath</sys_updated_by>
+        <sys_updated_on>2018-05-30 19:57:09</sys_updated_on>
+        <target_name>ScriptableRESTMessageClient.setEndpoint</target_name>
+        <target_scope display_value="Global">global</target_scope>
+        <target_type>scriptable</target_type>
+    </sys_scope_privilege>
+</record_update>
