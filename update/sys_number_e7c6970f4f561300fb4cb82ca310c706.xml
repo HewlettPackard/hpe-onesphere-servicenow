@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_number">
+    <sys_number action="INSERT_OR_UPDATE">
+        <category display_value="" name="x_228286_onesphere_onesphere_project">x_228286_onesphere_onesphere_project</category>
+        <maximum_digits>7</maximum_digits>
+        <number>1000</number>
+        <prefix>OneSphere</prefix>
+        <sys_class_name>sys_number</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-30 18:06:33</sys_created_on>
+        <sys_id>e7c6970f4f561300fb4cb82ca310c706</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>OneSphere</sys_name>
+        <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
+        <sys_update_name>sys_number_e7c6970f4f561300fb4cb82ca310c706</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-30 18:06:33</sys_updated_on>
+    </sys_number>
+</record_update>

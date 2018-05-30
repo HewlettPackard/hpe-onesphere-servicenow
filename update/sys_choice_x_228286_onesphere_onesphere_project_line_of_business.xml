@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="line_of_business" table="x_228286_onesphere_onesphere_project" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>line_of_business</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>incubation</label>
+            <language>en</language>
+            <name>x_228286_onesphere_onesphere_project</name>
+            <sequence/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-30 18:09:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d9879f0f4f561300fb4cb82ca310c783</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-30 18:09:59</sys_updated_on>
+            <value>incubation</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>line_of_business</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>new-ventures</label>
+            <language>en</language>
+            <name>x_228286_onesphere_onesphere_project</name>
+            <sequence/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-30 18:10:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>09a7df0f4f561300fb4cb82ca310c74e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-30 18:10:25</sys_updated_on>
+            <value>new-ventures</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>line_of_business</element>
+            <name>x_228286_onesphere_onesphere_project</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-05-30 18:09:59</sys_created_on>
+            <sys_id>c6979b0f4f561300fb4cb82ca310c732</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>line_of_business</sys_name>
+            <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
+            <sys_update_name>sys_choice_x_228286_onesphere_onesphere_project_line_of_business</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-05-30 18:09:59</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

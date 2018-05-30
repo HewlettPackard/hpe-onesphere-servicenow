@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_228286_onesphere_onesphere_project</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_228286_onesphere_onesphere_project">request_state=Approved^EQ<item endquery="false" field="request_state" goto="false" newquery="false" operator="=" or="false" value="Approved"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>ApprovalUser</name>
+        <order>1001</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[/*
+	# Copyright (2018-2019) Hewlett Packard Enterprise Development LP
+	#
+	# Licensed under the Apache License, Version 2.0 (the "License");
+	# You may not use this file except in compliance with the License.
+	# You may obtain a copy of the License at
+	#
+	# http://www.apache.org/licenses/LICENSE-2.0
+
+	#
+	# Unless required by applicable law or agreed to in writing, software
+	# distributed under the License is distributed on an "AS IS" BASIS,
+	# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	# See the License for the specific language governing permissions and
+	# limitations under the License.
+*/
+
+// Please provide your OneSphere details and creds below
+var oneSphereUri = "<YOUR ONESPHERE URI>";
+var oneSphereUser = "<YOUR USERNAME>";
+var oneSpherePassword = "<YOUR PASSWORD>";
+var rollback = false;
+var authToken = null;
+
+// Trim extra spaces if any
+function trimStr(str) {
+	if(str == null) return str;
+    return str.replace(/^\s+|\s+$/g, '');
+}
+
+function validateResponseStatus(userResponseStatus) {
+	if(userResponseStatus!=200 && userResponseStatus!=201 && userResponseStatus!=202 && userResponseStatus!=204){
+		gs.error("Error response code: "+ userResponseStatus);
+        throw userResponseStatus;
+	}
+}
+
+function getAuthToken(){
+	try {
+		oneSphereUser = '\"'+oneSphereUser+'\"';
+        oneSpherePassword = '\"'+oneSpherePassword +'\"';
+        var Session_request = new sn_ws.RESTMessageV2();
+        Session_request.setHttpMethod('post');
+        Session_request.setEndpoint(oneSphereUri+'/rest/session');
+        Session_request.setRequestHeader("Content-Type","application/json");
+        var body = '{"username":'+oneSphereUser+',"password":'+oneSpherePassword+'}';
+        Session_request.setRequestBody(body);
+
+        var Auth_response = Session_request.execute();
+        var httpResponseStatus = Auth_response.getStatusCode();
+        var responseBody = Auth_response.getBody();
+        session = JSON.parse(responseBody);
+	}
+    catch (ex) {
+		var message = Auth_response.getErrorMessage();
+        gs.error("Error while acquring Auth Token: " +message);
+	}
+	return session.token;
+}
+
+function deleteSession(authToken) {
+	try {
+		oneSphereUser = '\"'+oneSphereUser+'\"';
+        oneSpherePassword = '\"'+oneSpherePassword +'\"';
+        var Session_request = new sn_ws.RESTMessageV2();
+        Session_request.setHttpMethod('delete');
+        Session_request.setEndpoint(oneSphereUri+'/rest/session');
+        Session_request.setRequestHeader("Content-Type","application/json");
+        Session_request.setRequestHeader("Authorization", String(authToken));
+
+        var Auth_response = Session_request.execute();
+        var httpResponseStatus = Auth_response.getStatusCode();
+	}
+	catch (ex) {
+		var message = Auth_response.getErrorMessage();
+        gs.error("Error while delete session: " +message);
+	}
+}
+
+function createProject(authToken, current){
+	try {
+		var Projrequest = new sn_ws.RESTMessageV2();
+        Projrequest.setHttpMethod('post');
+        Projrequest.setEndpoint(oneSphereUri+'/rest/projects');
+        Projrequest.setRequestHeader("Content-Type","application/json");
+        Projrequest.setRequestHeader("Authorization", String(authToken));
+        project_name = '\"'+ current.project_name +'\"';
+        var body = '{"description": "string1", "name": '+project_name+',"tagUris": ["/rest/tags/environment=development", "/rest/tags/line-of-business=incubation", "/rest/tags/tier=gold"]}';
+        Projrequest.setRequestBody(body);
+        var response = Projrequest.execute();
+        userResponseStatus = response.getStatusCode();
+        validateResponseStatus(userResponseStatus);
+        var responseBody = response.getBody();
+        project = JSON.parse(responseBody);
+	}
+	catch (ex) {
+		var message = response.getErrorMessage();
+        gs.error("Error while Creating Project: " +message);
+        rollback = true;
+        throw ex;
+	}
+	return project;
+}
+
+function deleteProject(authToken, projectUri){
+	try {
+		var Projrequest = new sn_ws.RESTMessageV2();
+		Projrequest.setHttpMethod('delete');
+        Projrequest.setEndpoint('https://gandharva.dev.hpedevops.net' + project.uri) ;
+        Projrequest.setRequestHeader("Content-Type","application/json");
+        Projrequest.setRequestHeader("Authorization", String(authToken));
+        var response = Projrequest.execute();
+        var responseBody = response.getBody();
+        project = JSON.parse(responseBody);
+	}
+	catch (ex) {
+		var message = response.getErrorMessage();
+        gs.error("Error while deleting Project: " +message);
+        throw ex;
+	}
+}
+
+function getUsers(authToken){
+	try{
+		//Get the user list
+		var userRequest = new sn_ws.RESTMessageV2();
+        userRequest.setHttpMethod('get');
+        userRequest.setEndpoint(oneSphereUri+'/rest/users');
+        userRequest.setRequestHeader("Content-Type","application/json");
+        userRequest.setRequestHeader("Authorization", authToken);
+        var userGetResponse = userRequest.execute();
+        var userResponseBody = userGetResponse.getBody();
+        users = JSON.parse(userResponseBody);
+	}
+	catch (ex) {
+		var message = userGetResponse.getErrorMessage();
+        gs.error("Error while getting all users: " +message);
+		rollback = true;
+        throw ex;
+	}
+	return users;
+}
+
+function getMembershipRoleUris(authToken){
+	// Script to Get membership roles of Project Owner/User
+	try{
+		var memberRequest = new sn_ws.RESTMessageV2();
+        memberRequest.setHttpMethod('get');
+        memberRequest.setEndpoint(oneSphereUri+'/rest/membership-roles');
+        memberRequest.setRequestHeader("Content-Type","application/json");
+        memberRequest.setRequestHeader("Authorization", authToken);
+		var response = memberRequest.execute();
+        var responseBody = response.getBody();
+        rolesUris= JSON.parse(responseBody);
+	}
+	catch (ex) {
+		var message = response.getErrorMessage();
+        gs.error("Error while getting all membership roles: " +message);
+        rollback = true;
+		throw ex;
+	}
+	return rolesUris;
+}
+
+function createUser(authToken, name, email, role){
+	try{
+		//Get the user list
+		authToken = "undefine";
+        var userRequest = new sn_ws.RESTMessageV2();
+        userRequest.setHttpMethod('post');
+        userRequest.setEndpoint(oneSphereUri+'/rest/users');
+        userRequest.setRequestHeader("Content-Type","application/json");
+        userRequest.setRequestHeader("Authorization", authToken);
+        var userBody = '{"name": '+name+', "email": '+email+', "password": "Procurve@123", "role": '+role+'}';
+        userRequest.setRequestBody(userBody);
+        var userResponse = userRequest.execute();
+        userResponseStatus = userResponse.getStatusCode();
+        validateResponseStatus(userResponseStatus);
+                
+        var userResponseBody = userResponse.getBody();
+        response = JSON.parse(userResponseBody);
+	}
+	catch (ex) {
+		var message = userResponse.getErrorMessage();
+        gs.error("Error while creating User: "+name+"\n" +message);
+        rollback = true;
+        throw ex;
+	}
+	return response;
+}
+
+function passwordReset(authToken, email){
+	try{
+		//Get the user list
+        var passwordResetRequest = new sn_ws.RESTMessageV2();
+        passwordResetRequest.setHttpMethod('post');
+        passwordResetRequest.setEndpoint(oneSphereUri+'/rest/password-reset');
+        passwordResetRequest.setRequestHeader("Content-Type","application/json");
+        passwordResetRequest.setRequestHeader("Authorization", authToken);
+        var body = '{"email": '+email+'}';
+		passwordResetRequest.setRequestBody(body);
+		var response = passwordResetRequest.execute();
+        userResponseStatus = response.getStatusCode();
+	}
+	catch (ex) {
+		var message = response.getErrorMessage();
+		gs.debug("Error during Password Reset");
+	}
+	return userResponseStatus;
+}
+
+function processUser(authToken, name, email, role){
+	try{
+		// Get Existing Users
+		users = getUsers(authToken);
+        createUserFlag = true;
+        for (var j=0; j<users.members.length; j++){
+			member= users.members[j];
+            if (email == '\"'+member.email+'\"'){
+				user = member;
+                createUserFlag = false;
+			}
+		}
+		if (createUserFlag == true){
+			// Create user with specific role
+			user = createUser(authToken, name, email,  '\"'+role+ '\"');
+			// Password Reset Mail is sent for the newly created user
+			passwordReset(authToken, email);
+		}
+	}
+	catch (ex) {
+		var message = ex.getErrorMessage();
+		gs.error("Error while processing each User: " +message);
+		rollback = true;
+		throw ex;
+	}
+	return user;
+}
+
+function addUserToProject(authToken, projectUri, projectMemberUri, userUri){
+	try{
+		// Add user to the project
+        var memberRequest = new sn_ws.RESTMessageV2();
+		memberRequest.setHttpMethod('post');
+		memberRequest.setEndpoint(oneSphereUri+'/rest/memberships');
+        memberRequest.setRequestHeader("Content-Type","application/json");
+        memberRequest.setRequestHeader("Authorization", authToken);
+        var memberRequestBody = '{"membershipRoleUri":'+projectMemberUri+', "projectUri": '+projectUri+', "userUri": '+userUri+'}';
+        memberRequest.setRequestBody(memberRequestBody);
+        var memberResponse = memberRequest.execute();
+        memberResponseStatus = memberResponse.getStatusCode();
+        validateResponseStatus(memberResponseStatus);
+	}
+	catch (ex) {
+		var message = memberResponse.getErrorMessage();
+        gs.error("Error while adding user to the project: " +message);
+        rollback = true;      
+        throw ex;
+	}
+	return memberResponseStatus;
+}
+
+(function executeRule(current, previous /*null when async*/) {
+	try{
+		// Get Auth Token
+		authToken = getAuthToken();
+        // Create project
+        project = createProject(authToken, current);
+        try{
+			// Get Membership Role Uris for Project Owner and Project Member
+            rolesUris = getMembershipRoleUris(authToken);
+            for(var i=0; i<rolesUris.members.length; i++){
+				member = rolesUris.members[i];
+                if (member.name == "project-owner"){
+					projectOwnerUri = member.uri;
+				}
+				if (member.name == "project-member"){
+					projectMemberUri = member.uri;
+				}
+			}
+			// Get Project Owner name and email
+            var project_owner_name = current.project_owner.name;
+            var project_owner_email = current.project_owner.email;
+
+            // Check whether Project Owner User is present, if not create a project owner user and 
+            // add that user as administrator and finally add that user to the created project
+            user = processUser(authToken, '\"'+project_owner_name+'\"', '\"'+project_owner_email+'\"', "administrator");
+			// TODO we need to check if the user is added to the project and then add that user
+            addUserToProject(authToken, '\"'+project.uri+'\"', '\"'+projectOwnerUri+'\"', '\"'+user.uri+'\"');
+			
+			var member_list = current.project_member.getDisplayValue();
+            var member_array = member_list.split(",");
+
+            for(i = 0; i < member_array.length ; i++){
+				//Fetch each User from table
+                var sysUser1 = new GlideRecord('sys_user');
+				sysUser1.get('user_name',trimStr(member_array[i]));
+                name = '\"' + sysUser1.getValue('name') +'\"';
+                email = '\"'+ sysUser1.getValue('email')+'\"';
+				
+				// Check whether the project users already exist if not create them and
+                // add those users to the project as consumer
+                user = processUser(authToken, name, email, "consumer");
+                // TODO we need to check if the user is added to the project and then add that user
+                addUserToProject(authToken, '\"'+project.uri+'\"', '\"'+projectMemberUri+'\"', '\"'+user.uri+'\"');
+			}
+		}
+		catch (ex) {
+            if (rollback) {
+				gs.error("Process Failed, Rollback is in progress ");
+				deleteProject(authToken, project.uri);
+				
+                // Set the Request State value back to failed
+				current.request_state.setValue("Failed");
+				current.update();
+			}
+			throw ex;
+		}
+		current.request_state.setValue("Success");
+		current.update();
+	} catch (ex) {
+        gs.error("Process failed. Please check the logs");
+        current.request_state.setValue("Failed");
+		current.update();
+	}
+	finally {
+		if (authToken != null){
+        deleteSession(authToken);
+		}
+	}
+	current.process_state.setValue("True");
+	current.update();
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-30 18:43:04</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>6fae9b434f961300fb4cb82ca310c72d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ApprovalUser</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
+        <sys_update_name>sys_script_6fae9b434f961300fb4cb82ca310c72d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-30 19:51:05</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=6fae9b434f961300fb4cb82ca310c72d"/>
+</record_update>

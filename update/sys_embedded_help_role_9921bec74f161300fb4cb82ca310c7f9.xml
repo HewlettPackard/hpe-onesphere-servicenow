@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="x_228286_onesphere.onesphere_project_user" name="x_228286_onesphere.onesphere_project_user">dd21bec74f161300fb4cb82ca310c7f6</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-05-30 15:22:00</sys_created_on>
+        <sys_id>9921bec74f161300fb4cb82ca310c7f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>dd21bec74f161300fb4cb82ca310c7f6</sys_name>
+        <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
+        <sys_update_name>sys_embedded_help_role_9921bec74f161300fb4cb82ca310c7f9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-30 15:22:00</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>
