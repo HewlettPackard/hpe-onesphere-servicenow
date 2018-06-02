@@ -46,11 +46,13 @@
 	# See the License for the specific language governing permissions and
 	# limitations under the License.
 */
-
+/*
+Authors: Gandharva, Sahana, Manjunath, Krishnakanth and Shivakumar
+*/
 // Please provide your OneSphere details and creds below
-var oneSphereUri = "<YOUR ONESPHERE URI>";
-var oneSphereUser = "<YOUR USERNAME>";
-var oneSpherePassword = "<YOUR PASSWORD>";
+var oneSphereUri = "https://gandharva.dev.hpedevops.net";
+var oneSphereUser = "gandharvas@hpe.com";
+var oneSpherePassword = "Procurve@123";
 var rollback = false;
 var authToken = null;
 
@@ -197,13 +199,13 @@ function getMembershipRoleUris(authToken){
 function createUser(authToken, name, email, role){
 	try{
 		//Get the user list
-		authToken = "undefine";
         var userRequest = new sn_ws.RESTMessageV2();
         userRequest.setHttpMethod('post');
         userRequest.setEndpoint(oneSphereUri+'/rest/users');
         userRequest.setRequestHeader("Content-Type","application/json");
         userRequest.setRequestHeader("Authorization", authToken);
         var userBody = '{"name": '+name+', "email": '+email+', "password": "Procurve@123", "role": '+role+'}';
+		gs.info(userBody);
         userRequest.setRequestBody(userBody);
         var userResponse = userRequest.execute();
         userResponseStatus = userResponse.getStatusCode();
@@ -369,7 +371,7 @@ function addUserToProject(authToken, projectUri, projectMemberUri, userUri){
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>6fae9b434f961300fb4cb82ca310c72d</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>ApprovalUser</sys_name>
         <sys_overrides/>
         <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
@@ -377,7 +379,7 @@ function addUserToProject(authToken, projectUri, projectMemberUri, userUri){
         <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
         <sys_update_name>sys_script_6fae9b434f961300fb4cb82ca310c72d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-30 19:51:05</sys_updated_on>
+        <sys_updated_on>2018-06-01 10:35:33</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>
