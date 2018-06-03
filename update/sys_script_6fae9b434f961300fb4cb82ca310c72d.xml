@@ -50,9 +50,9 @@
 Authors: Gandharva, Sahana, Manjunath, Krishnakanth and Shivakumar
 */
 // Please provide your OneSphere details and creds below
-var oneSphereUri = "https://gandharva.dev.hpedevops.net";
-var oneSphereUser = "gandharvas@hpe.com";
-var oneSpherePassword = "Procurve@123";
+var oneSphereUri = "YOUR ONESPHERE URI";
+var oneSphereUser = "YOUR USERNAME";
+var oneSpherePassword = "YOUR PASSWORD";
 var rollback = false;
 var authToken = null;
 
@@ -328,7 +328,7 @@ function addUserToProject(authToken, projectUri, projectMemberUri, userUri){
             for(i = 0; i < member_array.length ; i++){
 				//Fetch each User from table
                 var sysUser1 = new GlideRecord('sys_user');
-				sysUser1.get('user_name',trimStr(member_array[i]));
+				sysUser1.get('name',trimStr(member_array[i]));
                 name = '\"' + sysUser1.getValue('name') +'\"';
                 email = '\"'+ sysUser1.getValue('email')+'\"';
 				
@@ -371,7 +371,7 @@ function addUserToProject(authToken, projectUri, projectMemberUri, userUri){
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>6fae9b434f961300fb4cb82ca310c72d</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>ApprovalUser</sys_name>
         <sys_overrides/>
         <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
@@ -379,7 +379,7 @@ function addUserToProject(authToken, projectUri, projectMemberUri, userUri){
         <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
         <sys_update_name>sys_script_6fae9b434f961300fb4cb82ca310c72d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-06-01 10:35:33</sys_updated_on>
+        <sys_updated_on>2018-06-03 14:35:30</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>
