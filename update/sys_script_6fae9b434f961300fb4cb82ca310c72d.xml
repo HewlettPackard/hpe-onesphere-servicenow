@@ -50,9 +50,9 @@
 Authors: Gandharva, Sahana, Manjunath, Krishnakanth and Shivakumar
 */
 // Please provide your OneSphere details and creds below
-var oneSphereUri = "YOUR ONESPHERE URI";
-var oneSphereUser = "YOUR USERNAME";
-var oneSpherePassword = "YOUR PASSWORD";
+var oneSphereUri = "https://gandharva.dev.hpedevops.net";
+var oneSphereUser = "gandharvas@hpe.com";
+var oneSpherePassword = "Procurve@123";
 var rollback = false;
 var authToken = null;
 
@@ -111,6 +111,40 @@ function deleteSession(authToken) {
 	}
 }
 
+function getTags(authToken){
+	try {
+		tags = [];
+		var tagKeys_request = new sn_ws.RESTMessageV2();
+        tagKeys_request.setHttpMethod('get');
+        tagKeys_request.setEndpoint(oneSphereUri+'/rest/tags');
+        tagKeys_request.setRequestHeader("Content-Type","application/json");
+        tagKeys_request.setRequestHeader("Authorization", String(authToken));
+
+		var tag_response = tagKeys_request.execute();
+        var httpResponseStatus = tag_response.getStatusCode();
+        var responseBody = tag_response.getBody();
+        tag_keys= JSON.parse(responseBody);
+		for (keys=0;keys<tag_keys.members.length;keys++) {
+			if (current.tier == tag_keys.members[keys].name){
+                tags.push('"'+tag_keys.members[keys].uri+'"');
+			}
+			if (current.line_of_business == tag_keys.members[keys].name){
+				tags.push('"'+tag_keys.members[keys].uri+'"');
+			}
+			if (current.environment == tag_keys.members[keys].name){
+				tags.push('"'+tag_keys.members[keys].uri+'"');
+			}
+		}
+	}
+    catch (ex) {
+        var message = response.getErrorMessage();
+        gs.error("Error while getting tags: " +message);
+        rollback = true;
+        throw ex;
+    }
+	return '['+tags+']';
+}
+
 function createProject(authToken, current){
 	try {
 		var Projrequest = new sn_ws.RESTMessageV2();
@@ -119,7 +153,8 @@ function createProject(authToken, current){
         Projrequest.setRequestHeader("Content-Type","application/json");
         Projrequest.setRequestHeader("Authorization", String(authToken));
         project_name = '\"'+ current.project_name +'\"';
-        var body = '{"description": "string1", "name": '+project_name+',"tagUris": ["/rest/tags/environment=development", "/rest/tags/line-of-business=incubation", "/rest/tags/tier=gold"]}';
+		tag_body = getTags(authToken);
+        var body = '{"description": "string1", "name": '+project_name+',"tagUris":'+ tag_body +'}';
         Projrequest.setRequestBody(body);
         var response = Projrequest.execute();
         userResponseStatus = response.getStatusCode();
@@ -371,7 +406,7 @@ function addUserToProject(authToken, projectUri, projectMemberUri, userUri){
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>6fae9b434f961300fb4cb82ca310c72d</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_name>ApprovalUser</sys_name>
         <sys_overrides/>
         <sys_package display_value="OneSphere Integration" source="x_228286_onesphere">0d703a034f161300fb4cb82ca310c79e</sys_package>
@@ -379,7 +414,7 @@ function addUserToProject(authToken, projectUri, projectMemberUri, userUri){
         <sys_scope display_value="OneSphere Integration">0d703a034f161300fb4cb82ca310c79e</sys_scope>
         <sys_update_name>sys_script_6fae9b434f961300fb4cb82ca310c72d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-06-03 14:35:30</sys_updated_on>
+        <sys_updated_on>2018-06-07 12:32:39</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>
