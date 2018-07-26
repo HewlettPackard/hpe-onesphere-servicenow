@@ -20,4 +20,4 @@ If you find yourself unable to import your repository due to the presence of fil
   6. Run `git push`
 
 # Quick Start 
-Please follow the steps mentioned in the [HPE OneSphere and ServiceNow integration blog article] (https://developer.hpe.com/blog/hpe-onesphere-and-servicenow-integration) which explains how ServiceNow can be integrated with OneSphere to try yourself.
+Please follow the steps mentioned in the [HPE OneSphere and ServiceNow integration blog article](https://developer.hpe.com/blog/hpe-onesphere-and-servicenow-integration) which explains how ServiceNow can be integrated with OneSphere to try yourself.
